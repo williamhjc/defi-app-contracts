@@ -21,6 +21,7 @@
     "@types/chai": "^4.3.20",
     "@types/mocha": "^10.0.10",
     "chai": "^4.3.7",
+    "dotenv": "^16.5.0",
     "ethers": "^6.1.0",
     "hardhat": "^2.24.1",
     "hardhat-gas-reporter": "^1.0.10",
@@ -31,7 +32,6 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^1.2.0",
-    "@openzeppelin/contracts": "^5.3.0",
-    "dotenv": "16.4.5"
+    "@openzeppelin/contracts": "^5.3.0"
   }
 }

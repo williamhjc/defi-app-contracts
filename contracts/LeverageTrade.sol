@@ -60,6 +60,7 @@
         event PositionIncreased(address indexed user, uint256 margin, uint256 size, uint256 avgPrice);
         event PositionClosed(address indexed user, uint256 profit, uint256 loss);
         event PositionLiquidated(address indexed user, uint256 margin, address indexed liquidator);
+        event DebugPosition(address indexed user, uint256 margin, bool isLong, uint256 size, uint256 openPrice);
 
         modifier onlyOwner() {
             require(msg.sender == owner, "Not owner");
@@ -190,6 +191,8 @@
             uint256 equity
         ) {
             Position storage pos = positions[user];
+            if (pos.margin == 0) revert NoPosition();
+            
             uint256 price = getPrice();
             uint256 equityValue = pos.margin + uint256(_calculatePnL(pos.isLong, pos.size, price, pos.openPrice));
             return (pos.isLong, pos.margin, uint256(pos.size), pos.openPrice, equityValue);
