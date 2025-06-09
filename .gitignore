@@ -1,0 +1,17 @@
+# 忽略构建文件
+artifacts/
+cache/
+
+# 忽略依赖
+node_modules/
+
+# 忽略环境变量
+.env
+
+# 忽略其他生成文件
+/build/
+/dist/
+
+# 忽略日志和临时文件
+*.log
+*.tmp
