@@ -2,6 +2,8 @@
 pragma solidity ^0.8.0;
 
 contract MockV3Aggregator {
+    error NotOwner();
+
     uint8 public immutable i_decimals;
     int256 public latestAnswer;
     address public immutable i_owner;
@@ -9,7 +11,7 @@ contract MockV3Aggregator {
     event PriceUpdated(int256 newPrice);
 
     modifier onlyOwner() {
-        require(msg.sender == i_owner, "Not owner");
+        if(msg.sender != i_owner) { revert NotOwner(); }
         _;
     }
 

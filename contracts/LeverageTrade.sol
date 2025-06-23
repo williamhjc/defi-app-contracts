@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
     pragma solidity ^0.8.20;
 
-    import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-    import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
-    import "hardhat/console.sol";
+    import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+    import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+    // import  "hardhat/console.sol";
 
     /// @title LeverageTrade - A contract for 2x leverage long/short trading
     /// @notice Enables users to open, close, and liquidate leveraged positions with Chainlink price feeds
     contract LeverageTrade {
         // Custom errors
+        error NotOwner();
         error InsufficientBalance(uint256 required, uint256 available);
         error InsufficientAllowance(uint256 required, uint256 allowed);
         error InvalidMarginAmount();
@@ -63,7 +64,7 @@
         event DebugPosition(address indexed user, uint256 margin, bool isLong, uint256 size, uint256 openPrice);
 
         modifier onlyOwner() {
-            require(msg.sender == owner, "Not owner");
+            if(msg.sender != owner) { revert NotOwner(); }
             _;
         }
 

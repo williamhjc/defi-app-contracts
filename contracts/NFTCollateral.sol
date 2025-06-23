@@ -4,6 +4,8 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract NFTCollateral is ERC721 {
     error MaxSupplyReached();
+    error NotOwner();
+
     uint256 public constant MAX_SUPPLY = 1000;
     
     uint256 private _totalSupply;
@@ -11,7 +13,7 @@ contract NFTCollateral is ERC721 {
     address public immutable i_owner;
 
     modifier onlyOwner() {
-        require(msg.sender == i_owner, "Not owner");
+        if(msg.sender != i_owner) { revert NotOwner(); }
         _;
     }
 
