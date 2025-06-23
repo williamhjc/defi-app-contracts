@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract NFTCollateral is ERC721 {
     error MaxSupplyReached();
@@ -8,15 +8,15 @@ contract NFTCollateral is ERC721 {
     
     uint256 private _totalSupply;
     uint256 private _tokenIdCounter;
-    address public owner;
+    address public immutable i_owner;
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Not owner");
+        require(msg.sender == i_owner, "Not owner");
         _;
     }
 
     constructor() ERC721("NFTCollateral", "NFTC") {
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
 
     function mint(address to) external onlyOwner {

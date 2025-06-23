@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/utils/math/Math.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 
 contract SwapPool {
     error InsufficientLiquidity();
@@ -9,8 +9,8 @@ contract SwapPool {
     error InsufficientReserveB();
     error TransferFailed();
 
-    IERC20 public tokenA;
-    IERC20 public tokenB;
+    IERC20 public immutable tokenA;
+    IERC20 public immutable tokenB;
     uint256 public reserveA;
     uint256 public reserveB;
 
