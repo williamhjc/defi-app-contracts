@@ -8,7 +8,7 @@ contract TokenB is ERC20 {
     address public immutable i_owner;
 
      modifier onlyOwner() {
-        require(msg.sender == i_owner, "Not owner");
+        if(msg.sender != i_owner) { revert NotOwner(); }
         _;
     }
 
