@@ -2,21 +2,21 @@
 pragma solidity ^0.8.0;
 
 contract MockV3Aggregator {
-    uint8 public decimals;
+    uint8 public immutable i_decimals;
     int256 public latestAnswer;
-    address public owner;
+    address public immutable i_owner;
 
     event PriceUpdated(int256 newPrice);
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Not owner");
+        require(msg.sender == i_owner, "Not owner");
         _;
     }
 
     constructor(uint8 _decimals, int256 _initialAnswer) {
-        decimals = _decimals;
+        i_decimals = _decimals;
         latestAnswer = _initialAnswer;
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
 
     function updateAnswer(int256 _answer) public onlyOwner {

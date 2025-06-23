@@ -273,7 +273,7 @@ describe("LeverageTrade", function () {
     await tokenB.connect(owner).approve(leverageTrade.target, INITIAL_BALANCE / 3n);
     await leverageTrade.initializeFeeReserve(INITIAL_BALANCE / 3n);
 
-    const feeReserve = await leverageTrade.feeReserve();
+    // const feeReserve = await leverageTrade.feeReserve();
     // console.log("Fee Reserve:", feeReserve.toString());
     // Distribute tokens to test users
     await tokenB.transfer(user1.address, INITIAL_BALANCE / 3n);
